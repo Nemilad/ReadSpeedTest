@@ -10,8 +10,11 @@ public:
     textdata(const textdata &copy);
     void loadtext(int textnumber);
     bool loadtext_file(std::string filename);
+    void test_text(int textnumber);
+    int get_char_count();
+    int get_word_count();
 private:
-
+    size_t database_size;
 };
 
 #endif // TEXTDATA_H
