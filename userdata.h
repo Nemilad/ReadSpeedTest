@@ -2,20 +2,24 @@
 #define USERDATA_H
 #include <iostream>
 #include <mainwindow.h>
-class UserData
+
+class UserData //сохраненные данные пользователя - контейнер
 {
 public:
     UserData();
     UserData(const UserData &copy);
-    list* get_first();
-    void pop_front();
-    void push_back(float _und_rate, float _time,int _char_count);
+
+    //Методы списка
+    void pop_all();//очистить данные пользователя
+    void push_back(float _und_rate, float _time,int _char_count, int word_count);
     bool is_empty();
     bool save_data(std::string filename);
     bool load_data(std::string filename);
-    void plot();
-    void get_speed_char();
-    void get_speed_word();
+
+    void plot();//функция отрисовки графика зависимости скорости от времени чтения
+    list* get_first();
+    int get_speed_char();
+    int get_speed_word();
 private:
     struct list
     {
@@ -26,8 +30,9 @@ private:
         int word_count;
         float time;
         list* next;
+        //QDateTime class - для хранения даты прочтения
     };
-    list* first,last;
+    list* first, last;
     size_t size;
 };
 
