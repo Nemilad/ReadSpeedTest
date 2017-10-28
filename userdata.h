@@ -17,7 +17,6 @@ public:
     bool load_data(std::string filename);
 
     void plot();//функция отрисовки графика зависимости скорости от времени чтения
-    list* get_first();
     int get_speed_char();
     int get_speed_word();
 private:

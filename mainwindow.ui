@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>760</width>
-    <height>422</height>
+    <width>1045</width>
+    <height>399</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -70,11 +70,11 @@
       </item>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="3">
+    <item row="0" column="0" rowspan="4">
      <widget class="QTextBrowser" name="textBrowser"/>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="pushButton_stop">
       <property name="text">
        <string>Стоп</string>
       </property>
@@ -93,7 +93,7 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButton_start">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -112,15 +112,57 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>760</width>
+     <width>1045</width>
      <height>18</height>
     </rect>
    </property>
    <property name="defaultUp">
     <bool>false</bool>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Профиль</string>
+    </property>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_3"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Сохранить данные</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Загрузить данные</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Статистика</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>Построить график</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
