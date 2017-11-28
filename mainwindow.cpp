@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     Textdata base1;
-    if (!base1.loadtext_file("test.txt"))
+    if (!(base1<<("database1.txt")))
         QMessageBox::critical(this,"Ошибка","Не найден файл базы данных.\nПроверьте файлы базы данных и перезапустите прогамму");
 }
 
@@ -14,5 +14,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
