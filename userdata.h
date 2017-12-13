@@ -2,6 +2,7 @@
 #define USERDATA_H
 #include <iostream>
 #include <mainwindow.h>
+#include <QTime>
 
 class UserData //сохраненные данные пользователя - контейнер
 {
@@ -27,7 +28,7 @@ private:
         float und_rate;
         int char_count;
         int word_count;
-        float time;
+        QTime time;
         list* next;
         //QDateTime class - для хранения даты прочтения
     };

@@ -1,5 +1,5 @@
 #include "textdata.h"
-
+#include <qfile.h>
 Textdata::Textdata()
 {
     database_size=0;
@@ -40,29 +40,31 @@ Textdata::Textdata(const Textdata &copy)
 QString Textdata::loadtext(QString textname)
 {
     text_data *p=first;
-    while(p->name!=textname && p!=NULL)p=p->next;
+    while(p!=NULL && p->name!=textname)
+        p=p->next;
     if (p!=NULL) return p->text;
     else return "";
 }
 
 bool Textdata::operator <<(std::string filename)
 {
-    std::ifstream file;
-    std::string temp;
-    text_data temp2;
-    file.open(filename);
-    if(!file.is_open()) return false;
+    QFile file(QString::fromStdString(filename));
+    QString temp,temp2,temp3;
+    if(!file.open(QIODevice::ReadOnly)) return false;
     else
     {
-        while(!file.eof())
+        while(!file.atEnd())
         {
-            file>>temp;
-            if(temp!="")temp2.name=QString::fromStdString(temp);
-            file>>temp;
-            if(temp!="")temp2.info=QString::fromStdString(temp);
-            file>>temp;
-            if(temp!="")temp2.text=QString::fromStdString(temp);
-
+            temp=file.readLine();
+            temp.truncate(temp.length()-1);
+            temp.truncate(temp.length()-1);
+            temp2=file.readLine();
+            temp2.truncate(temp2.length()-1);
+            temp2.truncate(temp2.length()-1);
+            temp3=file.readLine();
+            temp3.truncate(temp3.length()-1);
+            temp3.truncate(temp3.length()-1);
+            push_back(temp3,temp2,temp);
         }
         file.close();
         return true;
@@ -79,14 +81,14 @@ size_t Textdata::get_size()
     return database_size;
 }
 
-void Textdata::push_back(Textdata::text_data *in)
+void Textdata::push_back(QString in_text,QString in_info,QString in_name)
 {
     if (is_empty())
     {
         first=new text_data;
-        first->text=in->text;
-        first->info=in->info;
-        first->name=in->name;
+        first->text=in_text;
+        first->info=in_info;
+        first->name=in_name;
         first->next=NULL;
         last=first;
     }
@@ -94,9 +96,9 @@ void Textdata::push_back(Textdata::text_data *in)
     {
         text_data *p=last;
         p->next=new text_data;
-        p->next->text=in->text;
-        p->next->info=in->info;
-        p->next->name=in->name;
+        p->next->text=in_text;
+        p->next->info=in_info;
+        p->next->name=in_name;
         p->next->next=NULL;
         last=p->next;
     }

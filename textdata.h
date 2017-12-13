@@ -2,6 +2,7 @@
 #define TEXTDATA_H
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <QString>
 #include <mainwindow.h>
 #include <ui_mainwindow.h>
@@ -21,14 +22,14 @@ public:
     Textdata(const Textdata &copy);
 
     QString loadtext(QString textname); //загрузить определенный текст
-    bool operator <<(std::string filename); //загрузить базу данных
-    //bool test_text(QString textname); //загрузить тесты к тексту
+    bool operator << (std::string filename); //загрузить базу данных
+    bool test_text(QString textname); //загрузить тесты к тексту
     int get_char_count();
     int get_word_count();
 
     bool is_empty();//проверка на пустоту
     size_t get_size();//получить размер
-    void push_back(text_data* in);//добавить текст
+    void push_back(QString in_text,QString in_info,QString in_name);//добавить текст
     text_data* get_first();
 
 private:
