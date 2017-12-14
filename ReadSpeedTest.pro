@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     userdata.cpp \
-    textdata.cpp
+    textdata.cpp \
+    base_data.cpp
 
 HEADERS += \
         mainwindow.h \
     userdata.h \
-    textdata.h
+    textdata.h \
+    base_data.h
 
 FORMS += \
         mainwindow.ui
