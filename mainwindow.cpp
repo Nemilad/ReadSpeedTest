@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-Textdata<text_data> base1,base2,base3,base4,base5;
+Textdata base1,base2,base3,base4,base5;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,7 +26,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::load_text_base(Textdata<text_data> base,int base_index)
+void MainWindow::load_text_base(Textdata base, int base_index)
 {
     text_data* p = base.get_first();
     QTreeWidgetItem* temp;

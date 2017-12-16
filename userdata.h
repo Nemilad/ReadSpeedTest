@@ -2,40 +2,90 @@
 #define USERDATA_H
 #include <iostream>
 #include <mainwindow.h>
-#include <QTime>
+#include <base_data.h>
 
-class UserData //сохраненные данные пользователя - контейнер
+class UserData:public Base_data<user_list> //сохраненные данные пользователя - контейнер
 {
 public:
-    struct list
+    UserData()
     {
-        int speed_char;
-        int speed_word;
-        float und_rate;
-        int char_count;
-        int word_count;
-        QTime time;
-        list* next;
-        //QDateTime class - для хранения даты прочтения
-    };
+        size=0;
+        first=NULL;
+        last=NULL;
+    }
 
-    UserData();
-    UserData(const UserData &copy);
+    UserData(const UserData &copy)
+    {
+        user_list *p=copy.first;
+        user_list *p2;
+        while (p!=NULL)
+        {
+            if(p==copy.first)
+            {
+                first = new user_list;
+                first->speed_word=copy.first->speed_word;
+                first->speed_char=copy.first->speed_char;
+                first->time=copy.first->time;
+                first->und_rate=copy.first->und_rate;
+                first->next=NULL;
+                p2=first;
+                p=copy.first->next;
+            }
+            else
+            {
+                p2->next=new user_list;
+                p2->speed_word=p->speed_word;
+                p2->speed_char=p->speed_char;
+                p2->time=p->time;
+                p2->und_rate=p->und_rate;
+                p2->next=NULL;
+                p=p->next;
+            }
+        }
+        last=p2;
+        size=copy.size;
+    }
 
-    //Методы списка
-    void pop_all();//очистить данные пользователя
-    void push_back(list* in);
-    bool is_empty();
-    bool save_data(std::string filename);
-    bool load_data(std::string filename);
-    list* get_first();
+    void pop_all()//очистить данные пользователя
+    {
 
-    void plot();//функция отрисовки графика зависимости скорости от времени чтения
-    int get_speed_char();
-    int get_speed_word();
+    }
+
+    bool operator <<(QString filename)
+    {
+        QFile file(filename);
+
+        return true;
+    }
+
+    bool operator >>(QString filename)
+    {
+        QFile file(filename);
+
+        return true;
+    }
+
+    void plot()//метод отрисовки графика зависимости скорости от времени чтения
+    {
+
+    }
+
+    int get_speed_char()//скорость чтения в символах
+    {
+
+        return 0;
+    }
+
+    int get_speed_word()//скорость чтения в словах
+    {
+
+        return 0;
+    }
+
 private:
-    list* first, last;
-    size_t size;
+    //user_list* first;
+    //user_list* last;
+    //size_t size;
 };
 
 #endif // USERDATA_H

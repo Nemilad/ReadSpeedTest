@@ -1,24 +1,21 @@
-/*
 #include "textdata.h"
-#include <qfile.h>
 
-template <class Class_1>
-Textdata<Class_1>::Textdata()
+Textdata::Textdata()
 {
-    database_size=0;
+    size=0;
     first=NULL;
     last=NULL;
 }
-template <class Class_1>
-Textdata<Class_1>::Textdata(const Textdata &copy)
+
+Textdata::Textdata(const Textdata &copy)
 {
-    Class_1 *p=copy.first;
-    Class_1 *p2;
+    text_data *p=copy.first;
+    text_data *p2;
     while (p!=NULL)
     {
         if(p==copy.first)
         {
-            first = new Class_1;
+            first = new text_data;
             first->text=copy.first->text;
             first->info=copy.first->info;
             first->name=copy.first->name;
@@ -28,7 +25,7 @@ Textdata<Class_1>::Textdata(const Textdata &copy)
         }
         else
         {
-            p2->next=new Class_1;
+            p2->next=new text_data;
             p2->text=p->text;
             p2->info=p->info;
             p2->name=p->name;
@@ -37,29 +34,26 @@ Textdata<Class_1>::Textdata(const Textdata &copy)
         }
     }
     last=p2;
-    database_size=copy.database_size;
+    size=copy.size;
 }
 
-template <class Class_1>
-Textdata<Class_1>::~Textdata()
+Textdata::~Textdata()
 {
 
 }
 
-template <class Class_1>
-QString Textdata<Class_1>::loadtext(QString textname)
+QString Textdata::loadtext(QString textname)
 {
-    Class_1 *p=first;
+    text_data *p=first;
     while(p!=NULL && p->name!=textname)
         p=p->next;
     if (p!=NULL) return p->text;
     else return "";
 }
 
-template <class Class_1>
-bool Textdata<Class_1>::operator <<(std::string filename)
+bool Textdata::operator <<(QString filename)
 {
-    QFile file(QString::fromStdString(filename));
+    QFile file(filename);
     QString temp,temp2,temp3;
     if(!file.open(QIODevice::ReadOnly)) return false;
     else
@@ -75,53 +69,24 @@ bool Textdata<Class_1>::operator <<(std::string filename)
             temp3=file.readLine();
             temp3.truncate(temp3.length()-1);
             temp3.truncate(temp3.length()-1);
-            push_back(new Class_1(temp,temp3,temp2));
+            push_back(new text_data(temp,temp3,temp2));
         }
         file.close();
         return true;
     }
 }
 
-template <class Class_1>
-bool Textdata<Class_1>::is_empty()
+bool Textdata::test_text(QString textname)
 {
-    return (database_size==0);
+    return false;
 }
 
-template <class Class_1>
-size_t Textdata<Class_1>::get_size()
+int Textdata::get_char_count()
 {
-    return database_size;
+    return 0;
 }
 
-template <class Class_1>
-void Textdata<Class_1>::push_back(Class_1* in)
+int Textdata::get_word_count()
 {
-    if (is_empty())
-    {
-        first=new Class_1;
-        first->text=in->text;
-        first->info=in->info;
-        first->name=in->name;
-        first->next=NULL;
-        last=first;
-    }
-    else
-    {
-        Class_1 *p=last;
-        p->next=new Class_1;
-        p->next->text=in->text;
-        p->next->info=in->info;
-        p->next->name=in->name;
-        p->next->next=NULL;
-        last=p->next;
-    }
-    database_size++;
+    return 0;
 }
-
-template <class Class_1>
-Class_1 *Textdata<Class_1>::get_first()
-{
-    return first;
-}
-*/

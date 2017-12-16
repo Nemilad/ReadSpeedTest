@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void load_text_base(Textdata<text_data> base, int base_index);
+    void load_text_base(Textdata base, int base_index);
 
 private slots:
     void on_pushButton_start_pressed();
@@ -31,7 +31,6 @@ private:
     Ui::MainWindow *ui;
     QTimer* timer;
     QTime* time;
-
 };
 
 #endif // MAINWINDOW_H
