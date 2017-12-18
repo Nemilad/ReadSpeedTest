@@ -54,6 +54,7 @@ void MainWindow::on_pushButton_start_pressed()
         time=new QTime(0,0,0,0); //обнуление времени
         timer=new QTimer;
         ui->time_label->setText(time->toString("HH:mm:ss"));
+        //загрузка из базы данных
         if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 1 уровня")
         {
             curr_text_data.name=ui->treeWidget->currentItem()->text(0);
@@ -102,7 +103,8 @@ void MainWindow::on_pushButton_stop_pressed()
     timer->stop();
     ui->textBrowser->setText("");
     ui->treeWidget->setEnabled(true);
-    if (QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second()))!=0)
+
+    if (QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second()))!=0)//проверка на нулевое время
     {
         curr_user_data.speed_char=(get_char_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
         curr_user_data.speed_word=(get_word_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
@@ -114,7 +116,7 @@ void MainWindow::on_pushButton_stop_pressed()
     }
     curr_user_data.time=QDateTime::currentDateTime();
     curr_user_data.und_rate=0;
-    User.push_back(new user_list(curr_user_data));
+    User.push_back(new user_list(curr_user_data));//сохранение данных
 }
 
 void MainWindow::update_time()

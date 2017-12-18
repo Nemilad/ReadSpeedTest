@@ -61,6 +61,9 @@
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <property name="selectionMode">
           <enum>QAbstractItemView::NoSelection</enum>
          </property>
@@ -68,6 +71,9 @@
           <enum>Qt::ElideLeft</enum>
          </property>
          <property name="uniformRowHeights">
+          <bool>false</bool>
+         </property>
+         <property name="itemsExpandable">
           <bool>false</bool>
          </property>
          <property name="sortingEnabled">

@@ -89,10 +89,15 @@ bool UserData::operator >>(QString filename)
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     user_list *p = get_first();
-    while (p!=NULL)
+    if(p==NULL)return false;
+    else
     {
-        out<<p->speed_char<<endl<<p->speed_word<<endl<<p->und_rate<<endl<<p->time.toString("dd:MM:yyyy:HH:mm:ss")<<endl;
-        p=p->next;
+        while (p!=NULL)
+        {
+            out<<p->speed_char<<endl<<p->speed_word<<endl<<p->und_rate<<endl<<p->time.toString("dd:MM:yyyy:HH:mm:ss")<<endl;
+            p=p->next;
+        }
+        file.close();
+        return true;
     }
-    file.close();
 }

@@ -5,29 +5,29 @@
 
 struct text_data
 {
-  QString name;//название текста
-  QString text;//текст
-  QString info;//информация о тексте
-  text_data* next;//ссылка на следующий элемент
+    QString name;//название текста
+    QString text;//текст
+    QString info;//информация о тексте
+    text_data* next;//ссылка на следующий элемент
 
-  text_data()//пустой конструктор
-  {
-  }
+    text_data()//пустой конструктор
+    {
+    }
 
-  text_data(QString in_name,QString in_text,QString in_info) //конструктор инициализации
-  {
-      text=in_text;
-      name=in_name;
-      info=in_info;
-  }
+    text_data(QString in_name,QString in_text,QString in_info) //конструктор инициализации
+    {
+        text=in_text;
+        name=in_name;
+        info=in_info;
+    }
 
-  text_data(const text_data &copy) //конструктор копирования
-  {
-    name=copy.name;
-    text=copy.text;
-    info=copy.info;
-    next=copy.next;
-  }
+    text_data(const text_data &copy) //конструктор копирования
+    {
+        name=copy.name;
+        text=copy.text;
+        info=copy.info;
+        next=copy.next;
+    }
 };
 
 struct user_list
@@ -39,7 +39,6 @@ struct user_list
     //int word_count;
     QDateTime time;
     user_list* next;
-    //QDateTime class - для хранения даты прочтения
 
     user_list()//пустой конструктор
     {
@@ -47,18 +46,18 @@ struct user_list
 
     user_list(int in_speed_char,int in_speed_word,float in_und_rate,QDateTime in_time) //конструктор инициализации
     {
-         speed_char=in_speed_char;
-         speed_word=in_speed_word;
-         und_rate=in_und_rate;
-         time=in_time;
+        speed_char=in_speed_char;
+        speed_word=in_speed_word;
+        und_rate=in_und_rate;
+        time=in_time;
     }
     user_list(const user_list &copy) //конструктор копирования
     {
-      speed_char=copy.speed_char;
-      speed_word=copy.speed_word;
-      und_rate=copy.und_rate;
-      time=copy.time;
-      next=copy.next;
+        speed_char=copy.speed_char;
+        speed_word=copy.speed_word;
+        und_rate=copy.und_rate;
+        time=copy.time;
+        next=copy.next;
     }
 };
 
