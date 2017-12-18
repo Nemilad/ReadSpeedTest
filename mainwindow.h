@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <user_stats_window.h>
 #include <QString>
 #include <iostream>
 #include <QMessageBox>
@@ -9,6 +10,7 @@
 #include <userdata.h>
 #include <QTimer>
 #include <QTime>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -23,14 +25,27 @@ public:
     ~MainWindow();
     void load_text_base(Textdata base, int base_index);
 
+signals:
+    void sendData(UserData* out_data);
+
 private slots:
     void on_pushButton_start_pressed();
     void on_pushButton_stop_pressed();
     void update_time();
+    void on_stats_triggered();
+
+    void on_save_user_data_triggered();
+
+    void on_load_user_data_triggered();
+
 private:
     Ui::MainWindow *ui;
+    User_stats_window stat_form;
     QTimer* timer;
     QTime* time;
+    user_list curr_user_data;
+    text_data curr_text_data;
+    UserData User;
 };
 
 #endif // MAINWINDOW_H

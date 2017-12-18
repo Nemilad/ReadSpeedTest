@@ -20,6 +20,14 @@ struct text_data
       name=in_name;
       info=in_info;
   }
+
+  text_data(const text_data &copy) //конструктор копирования
+  {
+    name=copy.name;
+    text=copy.text;
+    info=copy.info;
+    next=copy.next;
+  }
 };
 
 struct user_list
@@ -32,6 +40,26 @@ struct user_list
     QDateTime time;
     user_list* next;
     //QDateTime class - для хранения даты прочтения
+
+    user_list()//пустой конструктор
+    {
+    }
+
+    user_list(int in_speed_char,int in_speed_word,float in_und_rate,QDateTime in_time) //конструктор инициализации
+    {
+         speed_char=in_speed_char;
+         speed_word=in_speed_word;
+         und_rate=in_und_rate;
+         time=in_time;
+    }
+    user_list(const user_list &copy) //конструктор копирования
+    {
+      speed_char=copy.speed_char;
+      speed_word=copy.speed_word;
+      und_rate=copy.und_rate;
+      time=copy.time;
+      next=copy.next;
+    }
 };
 
 template <class Class_1>
@@ -45,20 +73,14 @@ public:
     {
         if (is_empty())
         {
-            first=new Class_1;
-            first->text=in->text;
-            first->info=in->info;
-            first->name=in->name;
+            first=new Class_1(*in);
             first->next=NULL;
             last=first;
         }
         else
         {
             Class_1 *p=last;
-            p->next=new Class_1;
-            p->next->text=in->text;
-            p->next->info=in->info;
-            p->next->name=in->name;
+            p->next=new Class_1(*in);
             p->next->next=NULL;
             last=p->next;
         }

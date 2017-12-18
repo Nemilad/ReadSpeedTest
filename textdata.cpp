@@ -26,6 +26,7 @@ Textdata::Textdata(const Textdata &copy)
         else
         {
             p2->next=new text_data;
+            p2=p2->next;
             p2->text=p->text;
             p2->info=p->info;
             p2->name=p->name;
@@ -51,6 +52,15 @@ QString Textdata::loadtext(QString textname)
     else return "";
 }
 
+QString Textdata::loadtextinfo(QString textname)
+{
+    text_data *p=first;
+    while(p!=NULL && p->name!=textname)
+        p=p->next;
+    if (p!=NULL) return p->info;
+    else return "";
+}
+
 bool Textdata::operator <<(QString filename)
 {
     QFile file(filename);
@@ -61,14 +71,11 @@ bool Textdata::operator <<(QString filename)
         while(!file.atEnd())
         {
             temp=file.readLine();
-            temp.truncate(temp.length()-1);
-            temp.truncate(temp.length()-1);
+            temp.replace("\r\n","");
             temp2=file.readLine();
-            temp2.truncate(temp2.length()-1);
-            temp2.truncate(temp2.length()-1);
+            temp2.replace("\r\n","");
             temp3=file.readLine();
-            temp3.truncate(temp3.length()-1);
-            temp3.truncate(temp3.length()-1);
+            temp3.replace("\r\n","");
             push_back(new text_data(temp,temp3,temp2));
         }
         file.close();
@@ -81,12 +88,16 @@ bool Textdata::test_text(QString textname)
     return false;
 }
 
-int Textdata::get_char_count()
+
+int get_char_count(QString text)
 {
-    return 0;
+    QString temp=text;
+    temp.remove(" ");
+    return temp.length();
 }
 
-int Textdata::get_word_count()
+int get_word_count(QString text)
 {
-    return 0;
+
+    return text.count(' ')+1;
 }

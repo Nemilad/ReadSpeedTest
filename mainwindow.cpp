@@ -3,6 +3,7 @@
 
 Textdata base1,base2,base3,base4,base5;
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
         load_text_base(base4,3);
         load_text_base(base5,4);
     }
+    connect(this, SIGNAL(sendData(UserData*)), &stat_form, SLOT(recieveData(UserData*)));
+    time=new QTime(0,0,0,0);
+    timer=new QTimer;
 }
 
 MainWindow::~MainWindow()
@@ -41,6 +45,8 @@ void MainWindow::load_text_base(Textdata base, int base_index)
 
 void MainWindow::on_pushButton_start_pressed()
 {
+    ui->pushButton_stop->setEnabled(true);
+    ui->pushButton_start->setEnabled(false);
     if(ui->treeWidget->currentItem()->childCount()==0)
     {
         delete time;
@@ -48,11 +54,41 @@ void MainWindow::on_pushButton_start_pressed()
         time=new QTime(0,0,0,0); //обнуление времени
         timer=new QTimer;
         ui->time_label->setText(time->toString("HH:mm:ss"));
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 1 уровня") ui->textBrowser->setText(base1.loadtext(ui->treeWidget->currentItem()->text(0)));
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 2 уровня") ui->textBrowser->setText(base2.loadtext(ui->treeWidget->currentItem()->text(0)));
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 3 уровня") ui->textBrowser->setText(base3.loadtext(ui->treeWidget->currentItem()->text(0)));
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 4 уровня") ui->textBrowser->setText(base4.loadtext(ui->treeWidget->currentItem()->text(0)));
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 5 уровня") ui->textBrowser->setText(base5.loadtext(ui->treeWidget->currentItem()->text(0)));
+        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 1 уровня")
+        {
+            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
+            curr_text_data.text=base1.loadtext(ui->treeWidget->currentItem()->text(0));
+            curr_text_data.info=base1.loadtextinfo(ui->treeWidget->currentItem()->text(0));
+            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+        }
+        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 2 уровня")
+        {
+            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
+            curr_text_data.text=base2.loadtext(ui->treeWidget->currentItem()->text(0));
+            curr_text_data.info=base2.loadtextinfo(ui->treeWidget->currentItem()->text(0));
+            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+        }
+        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 3 уровня")
+        {
+            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
+            curr_text_data.text=base3.loadtext(ui->treeWidget->currentItem()->text(0));
+            curr_text_data.info=base3.loadtextinfo(ui->treeWidget->currentItem()->text(0));
+            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+        }
+        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 4 уровня")
+        {
+            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
+            curr_text_data.text=base4.loadtext(ui->treeWidget->currentItem()->text(0));
+            curr_text_data.info=base4.loadtextinfo(ui->treeWidget->currentItem()->text(0));
+            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+        }
+        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 5 уровня")
+        {
+            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
+            curr_text_data.text=base5.loadtext(ui->treeWidget->currentItem()->text(0));
+            curr_text_data.info=base5.loadtextinfo(ui->treeWidget->currentItem()->text(0));
+            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+        }
         ui->treeWidget->setEnabled(false);
         connect(timer, SIGNAL(timeout()), this, SLOT(update_time()));
         timer->start(1000);
@@ -61,13 +97,45 @@ void MainWindow::on_pushButton_start_pressed()
 
 void MainWindow::on_pushButton_stop_pressed()
 {
+    ui->pushButton_stop->setEnabled(false);
+    ui->pushButton_start->setEnabled(true);
     timer->stop();
     ui->textBrowser->setText("");
     ui->treeWidget->setEnabled(true);
+    if (QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second()))!=0)
+    {
+        curr_user_data.speed_char=(get_char_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
+        curr_user_data.speed_word=(get_word_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
+    }
+    else
+    {
+        curr_user_data.speed_char=0;
+        curr_user_data.speed_word=0;
+    }
+    curr_user_data.time=QDateTime::currentDateTime();
+    curr_user_data.und_rate=0;
+    User.push_back(new user_list(curr_user_data));
 }
 
 void MainWindow::update_time()
 {
     time=new QTime (time->addSecs(1));
     ui->time_label->setText(time->toString("HH:mm:ss"));
+}
+
+void MainWindow::on_stats_triggered()
+{
+    stat_form.setWindowModality(Qt::ApplicationModal);
+    stat_form.show();
+    emit sendData(new UserData(User));
+}
+
+void MainWindow::on_save_user_data_triggered()
+{
+    User>>QFileDialog::getSaveFileName(this,"save","",tr("*.txt"));
+}
+
+void MainWindow::on_load_user_data_triggered()
+{
+    User<<QFileDialog::getOpenFileName(this,"load","",tr("*.txt"));
 }
