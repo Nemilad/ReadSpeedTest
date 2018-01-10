@@ -1,6 +1,6 @@
 #ifndef TEXTDATA_H
 #define TEXTDATA_H
-#include <base_data.h>
+#include <basedata.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,19 +10,20 @@
 int get_char_count(QString text);//получить кол-во символов в тексте
 int get_word_count(QString text);//получить кол-во слов в тексте
 
-class Textdata:public Base_data<text_data> //база данный с текстами и тестами к ним
+//база данных с текстами и тестами к ним
+class Textdata:public BaseData<text_data>
 {
 public:
 
     Textdata();
     Textdata(const Textdata &copy);
-    ~Textdata();
+    //~Textdata();
 
     QString loadtext(QString textname); //найти определенный текст
     QString loadtextinfo(QString textname); //найти информацию о текте
     bool operator << (QString filename); //загрузить базу данных
-    bool test_text(QString textname); //загрузить тесты к тексту
-
+    QStringList test_qst(QString textname); //загрузить вопросы к тексту
+    QStringList test_ans(QString textname); //загрузить ответы к тексту
 
 private:
 

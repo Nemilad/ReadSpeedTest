@@ -28,16 +28,19 @@ SOURCES += \
         mainwindow.cpp \
     userdata.cpp \
     textdata.cpp \
-    base_data.cpp \
-    user_stats_window.cpp
+    user_stats_window.cpp \
+    basedata.cpp \
+    test_window.cpp
 
 HEADERS += \
         mainwindow.h \
     userdata.h \
     textdata.h \
-    base_data.h \
-    user_stats_window.h
+    user_stats_window.h \
+    basedata.h \
+    test_window.h
 
 FORMS += \
         mainwindow.ui \
-    user_stats_window.ui
+    user_stats_window.ui \
+    test_window.ui

@@ -1,18 +1,18 @@
 #ifndef USERDATA_H
 #define USERDATA_H
 #include <iostream>
-#include <base_data.h>
+#include <basedata.h>
 #include <QTextStream>
 #include <QFile>
 
-class UserData:public Base_data<user_list> //сохраненные данные пользователя - контейнер
+//сохраненные данные пользователя - контейнер
+class UserData:public BaseData<user_list>
 {
 public:
     UserData();
     UserData(const UserData &copy);
-    ~UserData();
+    //~UserData();
 
-    void pop_all();//очистить данные пользователя
     bool operator <<(QString filename);
     bool operator >>(QString filename);
 

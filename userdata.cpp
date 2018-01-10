@@ -41,27 +41,6 @@ UserData::UserData(const UserData &copy)
     size=copy.size;
 }
 
-UserData::~UserData()
-{
-
-}
-
-void UserData::pop_all()
-{
-    user_list*p;
-    while (p!=NULL && first!=NULL)
-    {
-        p=first->next;
-        if(p!=NULL)
-        {
-            delete first;
-            first=p->next;
-        }
-    }
-    last=NULL;
-    size=0;
-}
-
 bool UserData::operator <<(QString filename)
 {
     pop_all();
@@ -76,7 +55,8 @@ bool UserData::operator <<(QString filename)
             temp2=file.readLine().replace("\r\n","");
             temp3=file.readLine().replace("\r\n","");
             temp4=file.readLine().replace("\r\n","");
-            push_back(new user_list(temp.toInt(),temp2.toInt(),temp3.toFloat(),QDateTime::fromString(temp4,"dd:MM:yyyy:HH:mm:ss")));
+            push_back(new user_list(temp.toInt(),temp2.toInt(),temp3.toFloat(),
+                       QDateTime::fromString(temp4,"dd:MM:yyyy:HH:mm:ss")));
         }
         file.close();
         return true;
@@ -94,7 +74,8 @@ bool UserData::operator >>(QString filename)
     {
         while (p!=NULL)
         {
-            out<<p->speed_char<<endl<<p->speed_word<<endl<<p->und_rate<<endl<<p->time.toString("dd:MM:yyyy:HH:mm:ss")<<endl;
+            out<<p->speed_char<<endl<<p->speed_word<<endl<<p->und_rate<<endl
+              <<p->time.toString("dd:MM:yyyy:HH:mm:ss")<<endl;
             p=p->next;
         }
         file.close();

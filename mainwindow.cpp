@@ -37,14 +37,26 @@ void MainWindow::load_text_base(Textdata base, int base_index)
     while (p!=NULL)
     {
         temp=new QTreeWidgetItem;
-        temp->setText(0,p->name);
+        temp->setText(0,p->get_name());
         ui->treeWidget->topLevelItem(base_index)->addChild(temp);
         p=p->next;
     }
 }
 
+void MainWindow::reciveResult(float und)
+{
+   test_form->close();
+   curr_user_data.und_rate=und;
+   User.get_last()->und_rate=und;
+}
+
 void MainWindow::on_pushButton_start_pressed()
 {
+    test_form=new test_window;
+    connect(this, SIGNAL(sendQst(QStringList,QStringList)), test_form->get_test_window(), SLOT(recieveData(QStringList,QStringList)));
+    connect(this,SIGNAL(startTest()),test_form->get_test_window(),SLOT(startTest()));
+    connect(test_form->get_test_window(),SIGNAL(result(float)),this,SLOT(reciveResult(float)));
+
     ui->pushButton_stop->setEnabled(true);
     ui->pushButton_start->setEnabled(false);
     if(ui->treeWidget->currentItem()->childCount()==0)
@@ -54,41 +66,57 @@ void MainWindow::on_pushButton_start_pressed()
         time=new QTime(0,0,0,0); //обнуление времени
         timer=new QTimer;
         ui->time_label->setText(time->toString("HH:mm:ss"));
+        QTreeWidgetItem* curitem=ui->treeWidget->currentItem();
         //загрузка из базы данных
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 1 уровня")
+        if (curitem->parent()->text(0)=="Тексты 1 уровня")
         {
-            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
-            curr_text_data.text=base1.loadtext(ui->treeWidget->currentItem()->text(0));
-            curr_text_data.info=base1.loadtextinfo(ui->treeWidget->currentItem()->text(0));
-            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+            curr_text_data.set_name(curitem->text(0));
+            curr_text_data.set_text(base1.loadtext(curitem->text(0)));
+            curr_text_data.info=base1.loadtextinfo(curitem->text(0));
+            emit (sendQst(base1.test_qst(curitem->text(0)),base1.test_ans(curitem->text(0))));
+            ui->textBrowser->setText(curr_text_data.get_name()+"\n"
+                                     +curr_text_data.info+"\n"
+                                     +curr_text_data.get_text());
         }
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 2 уровня")
+        if (curitem->parent()->text(0)=="Тексты 2 уровня")
         {
-            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
-            curr_text_data.text=base2.loadtext(ui->treeWidget->currentItem()->text(0));
-            curr_text_data.info=base2.loadtextinfo(ui->treeWidget->currentItem()->text(0));
-            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+            curr_text_data.set_name(curitem->text(0));
+            curr_text_data.set_text(base2.loadtext(curitem->text(0)));
+            curr_text_data.info=base2.loadtextinfo(curitem->text(0));
+            emit (sendQst(base2.test_qst(curitem->text(0)),base2.test_ans(curitem->text(0))));
+            ui->textBrowser->setText(curr_text_data.get_name()+"\n"
+                                     +curr_text_data.info+"\n"
+                                     +curr_text_data.get_text());
         }
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 3 уровня")
+        if (curitem->parent()->text(0)=="Тексты 3 уровня")
         {
-            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
-            curr_text_data.text=base3.loadtext(ui->treeWidget->currentItem()->text(0));
-            curr_text_data.info=base3.loadtextinfo(ui->treeWidget->currentItem()->text(0));
-            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+            curr_text_data.set_name(curitem->text(0));
+            curr_text_data.set_text(base3.loadtext(curitem->text(0)));
+            curr_text_data.info=base3.loadtextinfo(curitem->text(0));
+            emit (sendQst(base3.test_qst(curitem->text(0)),base3.test_ans(curitem->text(0))));
+            ui->textBrowser->setText(curr_text_data.get_name()+"\n"
+                                     +curr_text_data.info+"\n"
+                                     +curr_text_data.get_text());
         }
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 4 уровня")
+        if (curitem->parent()->text(0)=="Тексты 4 уровня")
         {
-            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
-            curr_text_data.text=base4.loadtext(ui->treeWidget->currentItem()->text(0));
-            curr_text_data.info=base4.loadtextinfo(ui->treeWidget->currentItem()->text(0));
-            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+            curr_text_data.set_name(curitem->text(0));
+            curr_text_data.set_text(base4.loadtext(curitem->text(0)));
+            curr_text_data.info=base4.loadtextinfo(curitem->text(0));
+            emit (sendQst(base4.test_qst(curitem->text(0)),base4.test_ans(curitem->text(0))));
+            ui->textBrowser->setText(curr_text_data.get_name()+"\n"
+                                     +curr_text_data.info+"\n"
+                                     +curr_text_data.get_text());
         }
-        if (ui->treeWidget->currentItem()->parent()->text(0)=="Тексты 5 уровня")
+        if (curitem->parent()->text(0)=="Тексты 5 уровня")
         {
-            curr_text_data.name=ui->treeWidget->currentItem()->text(0);
-            curr_text_data.text=base5.loadtext(ui->treeWidget->currentItem()->text(0));
-            curr_text_data.info=base5.loadtextinfo(ui->treeWidget->currentItem()->text(0));
-            ui->textBrowser->setText(curr_text_data.name+"\n"+curr_text_data.info+"\n"+curr_text_data.text);
+            curr_text_data.set_name(curitem->text(0));
+            curr_text_data.set_text(base5.loadtext(curitem->text(0)));
+            curr_text_data.info=base5.loadtextinfo(curitem->text(0));
+            emit (sendQst(base5.test_qst(curitem->text(0)),base5.test_ans(curitem->text(0))));
+            ui->textBrowser->setText(curr_text_data.get_name()+"\n"
+                                     +curr_text_data.info+"\n"
+                                     +curr_text_data.get_text());
         }
         ui->treeWidget->setEnabled(false);
         connect(timer, SIGNAL(timeout()), this, SLOT(update_time()));
@@ -104,10 +132,19 @@ void MainWindow::on_pushButton_stop_pressed()
     ui->textBrowser->setText("");
     ui->treeWidget->setEnabled(true);
 
-    if (QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second()))!=0)//проверка на нулевое время
+    if (QTime(0, 0, 0).secsTo
+            (QTime(time->hour(), time->minute(), time->second()))!=0)
     {
-        curr_user_data.speed_char=(get_char_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
-        curr_user_data.speed_word=(get_word_count(curr_text_data.text)/((QTime(0, 0, 0).secsTo(QTime(time->hour(), time->minute(), time->second())))))*60;
+        curr_user_data.speed_char=(
+                    get_char_count
+                    (curr_text_data.get_text())/((QTime(0, 0, 0).secsTo
+                       (QTime
+                        (time->hour(), time->minute(), time->second())))))*60;
+        curr_user_data.speed_word=(
+                    get_word_count
+                    (curr_text_data.get_text())/((QTime(0, 0, 0).secsTo
+                       (QTime
+                        (time->hour(), time->minute(), time->second())))))*60;
     }
     else
     {
@@ -116,6 +153,13 @@ void MainWindow::on_pushButton_stop_pressed()
     }
     curr_user_data.time=QDateTime::currentDateTime();
     curr_user_data.und_rate=0;
+
+
+    test_form->setWindowModality(Qt::ApplicationModal);//окно теста
+    test_form->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    test_form->show();
+    emit(startTest());
+
     User.push_back(new user_list(curr_user_data));//сохранение данных
 }
 

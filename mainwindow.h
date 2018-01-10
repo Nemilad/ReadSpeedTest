@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <user_stats_window.h>
+#include <test_window.h>
 #include <QString>
 #include <iostream>
 #include <QMessageBox>
@@ -27,6 +28,11 @@ public:
 
 signals:
     void sendData(UserData* out_data);
+    void sendQst(QStringList test_q,QStringList test_a);
+    void startTest();
+
+public slots:
+    void reciveResult(float und);
 
 private slots:
     void on_pushButton_start_pressed();
@@ -41,6 +47,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     User_stats_window stat_form;
+    test_window* test_form;
     QTimer* timer;
     QTime* time;
     user_list curr_user_data;
