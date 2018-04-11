@@ -30,7 +30,8 @@ SOURCES += \
     textdata.cpp \
     user_stats_window.cpp \
     basedata.cpp \
-    test_window.cpp
+    test_window.cpp \
+    graph_window.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,9 +39,11 @@ HEADERS += \
     textdata.h \
     user_stats_window.h \
     basedata.h \
-    test_window.h
+    test_window.h \
+    graph_window.h
 
 FORMS += \
         mainwindow.ui \
     user_stats_window.ui \
-    test_window.ui
+    test_window.ui \
+    graph_window.ui

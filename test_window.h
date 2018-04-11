@@ -42,6 +42,9 @@ private:
     QStringList ans_var;//верные ответы
     QStringList user_ans;//ответы пользователя
     QString curr_ans[4];//текущие варианты ответа
+
+
+    bool testended; // КОСТЫЛЬ
 };
 
 #endif // TEST_WINDOW_H

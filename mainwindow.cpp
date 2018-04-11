@@ -52,6 +52,8 @@ void MainWindow::reciveResult(float und)
 
 void MainWindow::on_pushButton_start_pressed()
 {
+    if(!firststart) delete test_form;
+    firststart=false;
     test_form=new test_window;
     connect(this, SIGNAL(sendQst(QStringList,QStringList)), test_form->get_test_window(), SLOT(recieveData(QStringList,QStringList)));
     connect(this,SIGNAL(startTest()),test_form->get_test_window(),SLOT(startTest()));
@@ -159,7 +161,7 @@ void MainWindow::on_pushButton_stop_pressed()
     test_form->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     test_form->show();
     emit(startTest());
-
+    //delete(test_form);
     User.push_back(new user_list(curr_user_data));//сохранение данных
 }
 

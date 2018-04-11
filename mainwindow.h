@@ -53,6 +53,8 @@ private:
     user_list curr_user_data;
     text_data curr_text_data;
     UserData User;
+
+    bool firststart=true;//КОСТЫЛЬ
 };
 
 #endif // MAINWINDOW_H

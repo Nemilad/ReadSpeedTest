@@ -48,6 +48,8 @@ void test_window::recieveData(QStringList test_q, QStringList test_a)
 
 void test_window::startTest()
 {
+    testended=false;
+    qDebug("I'm alive! start");
     butt_num.addButton(ui->radioButton_1,1);
     butt_num.addButton(ui->radioButton_2,2);
     butt_num.addButton(ui->radioButton_3,3);
@@ -59,18 +61,19 @@ void test_window::startTest()
 
 void test_window::on_pushButton_next_pressed()
 {
-    if(butt_num.checkedButton()!=0)
+    if(butt_num.checkedButton()!=0 && testended==false)
     {
         if(curr_qst_num==qst.size())
         {
+            qDebug("I'm alive!1");
             user_ans+=butt_num.checkedButton()->text();
             int temp=0;
             for(int i=0;i<user_ans.size();i++)
             {
                 if(user_ans[i]==ans_var[i])temp++;
             }
+            testended=true;
             emit(result((float)temp/user_ans.size()));
-
         }
         else
         {

@@ -14,6 +14,7 @@ struct text_data
     text_data()
     {
     }
+
     //конструктор инициализации
     text_data(QString in_name,QString in_text,QString in_info,QStringList in_test_q,QStringList in_test_a)
     {
@@ -25,6 +26,7 @@ struct text_data
         //memcpy(test_q,in_test_q,sizeof(test_q));
         //memcpy(test_a,in_test_a,sizeof(test_a));
     }
+
     //конструктор копирования
     text_data(const text_data &copy)
     {
@@ -113,7 +115,7 @@ public:
             if(p!=NULL)
             {
                 delete first;
-                first=p->next;
+                first=p;
             }
         }
         last=NULL;
@@ -169,7 +171,7 @@ public:
             if(p!=NULL)
             {
                 delete first;
-                first=p->next;
+                first=p;
             }
         }
         last=NULL;
