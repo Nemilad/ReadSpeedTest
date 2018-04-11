@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     timer= new QTimer;
+    //загрузка баз данных
     if (!(base1<<("Database1.txt")) || !(base2<<("Database2.txt")) || !(base3<<("Database3.txt")) || !(base4<<("Database4.txt")) || !(base5<<("Database5.txt")))
         QMessageBox::critical(this,"Ошибка","Не найден файл базы данных.\nПроверьте файлы базы данных и перезапустите прогамму");
     else
@@ -20,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
         load_text_base(base4,3);
         load_text_base(base5,4);
     }
+    //Подключение сигналов форм статистики и графика
     connect(this, SIGNAL(sendData(UserData*)), &stat_form, SLOT(recieveData(UserData*)));
     connect(this, SIGNAL(sendData(UserData*)), &graph_form, SLOT(recieveData(UserData*)));
+    //установка таймера
     time=new QTime(0,0,0,0);
     timer=new QTimer;
 }
@@ -46,13 +49,19 @@ void MainWindow::load_text_base(Textdata base, int base_index)
 
 void MainWindow::reciveResult(float und)
 {
+    //приём данных из тестовой формы
    test_form->close();
    curr_user_data.und_rate=und;
+   curr_user_data.speed_char=curr_user_data.speed_char*curr_user_data.und_rate;//коррекция скорости чтения
+   curr_user_data.speed_word=curr_user_data.speed_word*curr_user_data.und_rate;//коррекция скорости чтения
    User.get_last()->und_rate=und;
+   User.get_last()->speed_char=curr_user_data.speed_char;//коррекция скорости чтения
+   User.get_last()->speed_word=curr_user_data.speed_word;//коррекция скорости чтения
 }
 
 void MainWindow::on_pushButton_start_pressed()
 {
+    //настройка окна тестов
     if(!firststart) delete test_form;
     firststart=false;
     test_form=new test_window;
@@ -162,7 +171,6 @@ void MainWindow::on_pushButton_stop_pressed()
     test_form->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     test_form->show();
     emit(startTest());
-    //delete(test_form);
     User.push_back(new user_list(curr_user_data));//сохранение данных
 }
 

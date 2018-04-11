@@ -16,11 +16,9 @@ public:
     bool operator <<(QString filename);
     bool operator >>(QString filename);
 
-    void plot();//метод отрисовки графика зависимости скорости от времени чтения
+    //int get_speed_char();//скорость чтения в символах
 
-    int get_speed_char();//скорость чтения в символах
-
-    int get_speed_word();//скорость чтения в словах
+    //int get_speed_word();//скорость чтения в словах
 
 
 private:

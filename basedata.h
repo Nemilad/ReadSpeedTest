@@ -70,8 +70,8 @@ private:
 
 struct user_list
 {
-    int speed_char;
-    int speed_word;
+    float speed_char;
+    float speed_word;
     float und_rate;
     QDateTime time;
     user_list* next;

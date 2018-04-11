@@ -37,8 +37,11 @@ public slots:
 
 private slots:
     void on_pushButton_start_pressed();
+
     void on_pushButton_stop_pressed();
+
     void update_time();
+
     void on_stats_triggered();
 
     void on_save_user_data_triggered();
