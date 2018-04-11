@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = ReadSpeedTest
 TEMPLATE = app
@@ -31,7 +31,8 @@ SOURCES += \
     user_stats_window.cpp \
     basedata.cpp \
     test_window.cpp \
-    graph_window.cpp
+    graph_window.cpp \
+    qcustomplot.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     user_stats_window.h \
     basedata.h \
     test_window.h \
-    graph_window.h
+    graph_window.h \
+    qcustomplot.h
 
 FORMS += \
         mainwindow.ui \

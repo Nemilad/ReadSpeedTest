@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <user_stats_window.h>
+#include <graph_window.h>
 #include <test_window.h>
 #include <QString>
 #include <iostream>
@@ -44,9 +45,12 @@ private slots:
 
     void on_load_user_data_triggered();
 
+    void on_graph_triggered();
+
 private:
     Ui::MainWindow *ui;
     User_stats_window stat_form;
+    graph_window graph_form;
     test_window* test_form;
     QTimer* timer;
     QTime* time;

@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
         load_text_base(base5,4);
     }
     connect(this, SIGNAL(sendData(UserData*)), &stat_form, SLOT(recieveData(UserData*)));
+    connect(this, SIGNAL(sendData(UserData*)), &graph_form, SLOT(recieveData(UserData*)));
     time=new QTime(0,0,0,0);
     timer=new QTimer;
 }
@@ -186,4 +187,11 @@ void MainWindow::on_save_user_data_triggered()
 void MainWindow::on_load_user_data_triggered()
 {
     User<<QFileDialog::getOpenFileName(this,"load","",tr("*.txt"));
+}
+
+void MainWindow::on_graph_triggered()
+{
+    graph_form.setWindowModality(Qt::ApplicationModal);
+    graph_form.show();
+    emit sendData(new UserData(User));
 }

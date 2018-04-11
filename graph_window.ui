@@ -17,14 +17,56 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>График</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QCustomPlot" name="widget_graph" native="true"/>
+   </item>
    <item row="0" column="0">
-    <widget class="QGraphicsView" name="graphicsView"/>
+    <widget class="QComboBox" name="comboBox">
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>График слов в минуту</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>График символов в минуту</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>График коэффициента понимания</string>
+      </property>
+     </item>
+    </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
