@@ -16,6 +16,8 @@ User_stats_window::~User_stats_window()
 void User_stats_window::recieveData(UserData* in_data)
 {
     ui->treeWidget->clear();
+    ui->treeWidget->setColumnWidth(0,170);
+    ui->treeWidget->setHeaderHidden(false);
     user=in_data;
     user_list* temp=user->get_first();
     while(temp!=NULL)

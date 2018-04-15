@@ -65,6 +65,9 @@ void graph_window::plot_xy(QString name)
     ui->widget_graph->yAxis->setLabel(name);
     ui->widget_graph->xAxis->setRange(0, x.size()-1);
     ui->widget_graph->yAxis->setRange(0, *std::max_element(y.begin(),y.end()));
+    QSharedPointer<QCPAxisTickerFixed> fixedTicker(new QCPAxisTickerFixed);
+    ui->widget_graph->xAxis->setTicker(fixedTicker);
+    fixedTicker->setTickStep(1.0);
     ui->widget_graph->replot();
 }
 

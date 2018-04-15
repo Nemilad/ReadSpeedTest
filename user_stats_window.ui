@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
-    <height>445</height>
+    <width>719</width>
+    <height>319</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,8 +36,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>686</width>
-        <height>443</height>
+        <width>717</width>
+        <height>317</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -52,6 +52,9 @@
        </property>
        <property name="bottomMargin">
         <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>6</number>
        </property>
        <item row="0" column="0">
         <widget class="QTreeWidget" name="treeWidget">
@@ -82,6 +85,9 @@
          <property name="animated">
           <bool>true</bool>
          </property>
+         <property name="allColumnsShowFocus">
+          <bool>false</bool>
+         </property>
          <attribute name="headerVisible">
           <bool>true</bool>
          </attribute>
@@ -91,8 +97,14 @@
          <attribute name="headerDefaultSectionSize">
           <number>170</number>
          </attribute>
+         <attribute name="headerHighlightSections">
+          <bool>false</bool>
+         </attribute>
          <attribute name="headerMinimumSectionSize">
           <number>170</number>
+         </attribute>
+         <attribute name="headerShowSortIndicator" stdset="0">
+          <bool>true</bool>
          </attribute>
          <attribute name="headerStretchLastSection">
           <bool>true</bool>
