@@ -50,6 +50,8 @@ private slots:
 
     void on_graph_triggered();
 
+    void on_prog_info_triggered();
+
 private:
     Ui::MainWindow *ui;
     User_stats_window stat_form;

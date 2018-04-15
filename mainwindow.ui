@@ -218,7 +218,7 @@
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>Помощь</string>
+     <string>Инфо</string>
     </property>
     <addaction name="prog_info"/>
    </widget>

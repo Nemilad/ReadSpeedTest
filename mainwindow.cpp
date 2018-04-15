@@ -203,3 +203,14 @@ void MainWindow::on_graph_triggered()
     graph_form.show();
     emit sendData(new UserData(User));
 }
+
+void MainWindow::on_prog_info_triggered()
+{
+    QMessageBox::information(this,"О программе",
+    "Разработчики:\n"
+    "Шаимов Никита Денисович\n"
+    "Пересадов Владислав Трофимович\n"
+    "Программа создана в качестве курсовой работы\n"
+    "МИЭМ НИУ ВШЭ\n"
+    "2018");
+}
