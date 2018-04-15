@@ -157,12 +157,7 @@ void MainWindow::on_pushButton_stop_pressed()
                     (curr_text_data.get_text())/((QTime(0, 0, 0).secsTo
                        (QTime
                         (time->hour(), time->minute(), time->second())))))*60;
-    }
-    else
-    {
-        curr_user_data.speed_char=0;
-        curr_user_data.speed_word=0;
-    }
+
     curr_user_data.time=QDateTime::currentDateTime();
     curr_user_data.und_rate=0;
 
@@ -172,6 +167,7 @@ void MainWindow::on_pushButton_stop_pressed()
     test_form->show();
     emit(startTest());
     User.push_back(new user_list(curr_user_data));//сохранение данных
+    }
 }
 
 void MainWindow::update_time()
