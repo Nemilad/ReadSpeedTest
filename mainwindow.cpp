@@ -10,9 +10,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     timer= new QTimer;
-    //загрузка баз данных
-    if (!(base1<<("Database1.txt")) || !(base2<<("Database2.txt")) || !(base3<<("Database3.txt")) || !(base4<<("Database4.txt")) || !(base5<<("Database5.txt")))
-        QMessageBox::critical(this,"Ошибка","Не найден файл базы данных.\nПроверьте файлы базы данных и перезапустите прогамму");
+
+    //Загрузка баз данных
+    if (!(base1<<("Database1.txt"))
+     || !(base2<<("Database2.txt"))
+     || !(base3<<("Database3.txt"))
+     || !(base4<<("Database4.txt"))
+     || !(base5<<("Database5.txt")))
+        QMessageBox::critical
+        (this,"Ошибка","Не найден файл базы данных.\nПроверьте файлы базы данных и перезапустите прогамму");
     else
     {
         load_text_base(base1,0);
@@ -21,10 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
         load_text_base(base4,3);
         load_text_base(base5,4);
     }
+
     //Подключение сигналов форм статистики и графика
     connect(this, SIGNAL(sendData(UserData*)), &stat_form, SLOT(recieveData(UserData*)));
     connect(this, SIGNAL(sendData(UserData*)), &graph_form, SLOT(recieveData(UserData*)));
-    //установка таймера
+    //Установка таймера
     time=new QTime(0,0,0,0);
     timer=new QTimer;
 }
@@ -49,22 +56,23 @@ void MainWindow::load_text_base(Textdata base, int base_index)
 
 void MainWindow::reciveResult(float und)
 {
-    //приём данных из тестовой формы
+    //Приём данных из тестовой формы
    test_form->close();
    curr_user_data.und_rate=und;
-   curr_user_data.speed_char=curr_user_data.speed_char*curr_user_data.und_rate;//коррекция скорости чтения
-   curr_user_data.speed_word=curr_user_data.speed_word*curr_user_data.und_rate;//коррекция скорости чтения
+   curr_user_data.speed_char=curr_user_data.speed_char*curr_user_data.und_rate;//Коррекция скорости чтения
+   curr_user_data.speed_word=curr_user_data.speed_word*curr_user_data.und_rate;//Коррекция скорости чтения
    User.get_last()->und_rate=und;
-   User.get_last()->speed_char=curr_user_data.speed_char;//коррекция скорости чтения
-   User.get_last()->speed_word=curr_user_data.speed_word;//коррекция скорости чтения
+   User.get_last()->speed_char=curr_user_data.speed_char;//Коррекция скорости чтения
+   User.get_last()->speed_word=curr_user_data.speed_word;//Коррекция скорости чтения
 }
 
 void MainWindow::on_pushButton_start_pressed()
 {
-    //настройка окна тестов
+    //Настройка окна тестов
     if(!firststart) delete test_form;
     firststart=false;
     test_form=new test_window;
+    //Подключение сигналов тестового окна
     connect(this, SIGNAL(sendQst(QStringList,QStringList)), test_form->get_test_window(), SLOT(recieveData(QStringList,QStringList)));
     connect(this,SIGNAL(startTest()),test_form->get_test_window(),SLOT(startTest()));
     connect(test_form->get_test_window(),SIGNAL(result(float)),this,SLOT(reciveResult(float)));
@@ -75,11 +83,11 @@ void MainWindow::on_pushButton_start_pressed()
     {
         delete time;
         delete timer;
-        time=new QTime(0,0,0,0); //обнуление времени
+        time=new QTime(0,0,0,0); //Обнуление времени
         timer=new QTimer;
         ui->time_label->setText(time->toString("HH:mm:ss"));
         QTreeWidgetItem* curitem=ui->treeWidget->currentItem();
-        //загрузка из базы данных
+        //Загрузка из базы данных
         if (curitem->parent()->text(0)=="Тексты 1 уровня")
         {
             curr_text_data.set_name(curitem->text(0));
@@ -161,12 +169,12 @@ void MainWindow::on_pushButton_stop_pressed()
     curr_user_data.time=QDateTime::currentDateTime();
     curr_user_data.und_rate=0;
 
-
-    test_form->setWindowModality(Qt::ApplicationModal);//окно теста
+    //Вывод тестового окна
+    test_form->setWindowModality(Qt::ApplicationModal);
     test_form->setWindowFlags(Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     test_form->show();
-    emit(startTest());
-    User.push_back(new user_list(curr_user_data));//сохранение данных
+    emit(startTest());//Сигнал начала теста
+    User.push_back(new user_list(curr_user_data));//Сохранение данных
     }
 }
 
@@ -185,11 +193,13 @@ void MainWindow::on_stats_triggered()
 
 void MainWindow::on_save_user_data_triggered()
 {
+    //Сохранение данных пользователя
     User>>QFileDialog::getSaveFileName(this,"save","",tr("*.txt"));
 }
 
 void MainWindow::on_load_user_data_triggered()
 {
+    //Загрузка данных пользователя
     User<<QFileDialog::getOpenFileName(this,"load","",tr("*.txt"));
 }
 

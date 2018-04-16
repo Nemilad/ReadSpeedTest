@@ -19,7 +19,7 @@ public:
     ~User_stats_window();
 
 public slots:
-    void recieveData(UserData* in_data);//приём данных и передача в форму
+    void recieveData(UserData* in_data);//Приём данных и передача в форму
 
 private:
     Ui::User_stats_window *ui;

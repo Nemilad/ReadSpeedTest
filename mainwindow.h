@@ -25,14 +25,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    //Загрузка данных из базы
     void load_text_base(Textdata base, int base_index);
 
 signals:
+    //Отправка данных пользователя
     void sendData(UserData* out_data);
+    //Отправка вопросов
     void sendQst(QStringList test_q,QStringList test_a);
+    //Сигнал начала теста
     void startTest();
 
 public slots:
+    //Приём результатов теста
     void reciveResult(float und);
 
 private slots:
@@ -54,16 +59,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    User_stats_window stat_form;
-    graph_window graph_form;
-    test_window* test_form;
-    QTimer* timer;
-    QTime* time;
-    user_list curr_user_data;
-    text_data curr_text_data;
-    UserData User;
+    User_stats_window stat_form; //Форма статистики
+    graph_window graph_form;     //Форма графика
+    test_window* test_form;      //Форма теста
+    QTimer* timer;               //Таймер
+    QTime* time;                 //Время
+    user_list curr_user_data;    //Последние данные пользователя
+    text_data curr_text_data;    //Последние данные текста
+    UserData User;               //Данные пользователя
 
-    bool firststart=true;//КОСТЫЛЬ
+    bool firststart=true;
 };
 
 #endif // MAINWINDOW_H

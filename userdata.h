@@ -5,21 +5,15 @@
 #include <QTextStream>
 #include <QFile>
 
-//сохраненные данные пользователя - контейнер
+//Сохраненные данные пользователя - контейнер
 class UserData:public BaseData<user_list>
 {
 public:
     UserData();
     UserData(const UserData &copy);
-    //~UserData();
 
-    bool operator <<(QString filename);
-    bool operator >>(QString filename);
-
-    //int get_speed_char();//скорость чтения в символах
-
-    //int get_speed_word();//скорость чтения в словах
-
+    bool operator <<(QString filename);//Чтение файла
+    bool operator >>(QString filename);//Запись файла
 
 private:
 

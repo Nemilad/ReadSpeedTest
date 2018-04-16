@@ -19,11 +19,10 @@ class graph_window : public QWidget
 public:
     explicit graph_window(QWidget *parent = 0);
     ~graph_window();
-    void set_xy(user_list *in_p, char value);
-    void plot_xy(QString name);
+    void plot_xy(QString name);//Построение графика
 
 public slots:
-    void recieveData(UserData* in_data);//приём данных и передача в форму
+    void recieveData(UserData* in_data);//Приём данных и передача в форму
 
 private slots:
     void on_comboBox_currentIndexChanged(int index);
@@ -32,6 +31,8 @@ private:
     Ui::graph_window *ui;
     UserData* data;
     QVector<double> x, y;
+    //Установка значений для графика
+    void set_xy(user_list *in_p, char value);
 };
 
 #endif // GRAPH_WINDOW_H

@@ -96,7 +96,6 @@ QStringList Textdata::test_qst(QString textname)
     {
         return p->test_q;
     }
-    //else return "";
 }
 
 QStringList Textdata::test_ans(QString textname)
@@ -108,7 +107,6 @@ QStringList Textdata::test_ans(QString textname)
     {
         return p->test_a;
     }
-    //else return "";
 }
 
 int get_char_count(QString text)

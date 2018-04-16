@@ -7,15 +7,15 @@
 
 struct text_data
 {
-    QString info;//информация о тексте
-    text_data* next;//ссылка на следующий элемент
+    QString info;//Информация о тексте
+    text_data* next;
 
-    //пустой конструктор
+    //Пустой конструктор
     text_data()
     {
     }
 
-    //конструктор инициализации
+    //Конструктор инициализации
     text_data(QString in_name,QString in_text,QString in_info,QStringList in_test_q,QStringList in_test_a)
     {
         if(in_text!="")text=in_text;
@@ -23,11 +23,9 @@ struct text_data
         info=in_info;
         test_q=in_test_q;
         test_a=in_test_a;
-        //memcpy(test_q,in_test_q,sizeof(test_q));
-        //memcpy(test_a,in_test_a,sizeof(test_a));
     }
 
-    //конструктор копирования
+    //Конструктор копирования
     text_data(const text_data &copy)
     {
         name=copy.name;
@@ -36,8 +34,6 @@ struct text_data
         next=copy.next;
         test_q=copy.test_q;
         test_a=copy.test_a;
-        //memcpy(test_q,copy.test_q,sizeof(test_q));
-        //memcpy(test_a,copy.test_a,sizeof(test_a));
     }
 
     void set_name(QString in_name)
@@ -63,23 +59,25 @@ struct text_data
     QStringList test_q;//Вопросы
     QStringList test_a;//Варианты ответа
 private:
-    QString name;//название текста
-    QString text;//текст
+    QString name;//Название текста
+    QString text;//Текст
 
 };
 
 struct user_list
 {
-    float speed_char;
-    float speed_word;
-    float und_rate;
-    QDateTime time;
+    float speed_char; //Скорость чтения символов
+    float speed_word; //Скорость чтения слов
+    float und_rate;   //Коэф. понимания
+    QDateTime time;   //Дата и время тестирования
     user_list* next;
 
-    user_list()//пустой конструктор
+    //Пустой конструктор
+    user_list()
     {
     }
-    //конструктор инициализации
+
+    //Конструктор инициализации
     user_list(int in_speed_char,int in_speed_word,float in_und_rate,
               QDateTime in_time)
     {
@@ -88,7 +86,8 @@ struct user_list
         und_rate=in_und_rate;
         time=in_time;
     }
-    //конструктор копирования
+
+    //Конструктор копирования
     user_list(const user_list &copy)
     {
         speed_char=copy.speed_char;

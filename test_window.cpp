@@ -17,6 +17,13 @@ test_window::~test_window()
     ans_var.clear();
 }
 
+void test_window::closeEvent(QCloseEvent *e)
+{
+    testended=true;
+    emit(result(0));
+    e->accept();
+}
+
 test_window *test_window::get_test_window()
 {
     return this;
