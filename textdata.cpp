@@ -118,6 +118,5 @@ int get_char_count(QString text)
 
 int get_word_count(QString text)
 {
-
     return text.count(' ')+1;
 }

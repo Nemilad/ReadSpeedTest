@@ -19,8 +19,8 @@ test_window::~test_window()
 
 void test_window::closeEvent(QCloseEvent *e)
 {
+    if(testended==false) emit(result(0));
     testended=true;
-    emit(result(0));
     e->accept();
 }
 

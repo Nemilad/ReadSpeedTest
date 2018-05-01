@@ -14,9 +14,6 @@ public:
 
     bool operator <<(QString filename);//Чтение файла
     bool operator >>(QString filename);//Запись файла
-
-private:
-
 };
 
 #endif // USERDATA_H

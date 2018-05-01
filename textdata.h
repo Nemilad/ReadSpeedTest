@@ -17,15 +17,12 @@ public:
 
     Textdata();
     Textdata(const Textdata &copy);
-
+    //Методы класса
     QString loadtext(QString textname);     //Найти определенный текст
     QString loadtextinfo(QString textname); //Найти информацию о текте
     bool operator << (QString filename);    //Загрузить базу данных
     QStringList test_qst(QString textname); //Загрузить вопросы к тексту
     QStringList test_ans(QString textname); //Загрузить ответы к тексту
-
-private:
-
 };
 
 #endif // TEXTDATA_H

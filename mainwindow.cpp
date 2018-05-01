@@ -59,11 +59,13 @@ void MainWindow::reciveResult(float und)
     //Приём данных из тестовой формы
    test_form->close();
    curr_user_data.und_rate=und;
-   curr_user_data.speed_char=curr_user_data.speed_char*curr_user_data.und_rate;//Коррекция скорости чтения
-   curr_user_data.speed_word=curr_user_data.speed_word*curr_user_data.und_rate;//Коррекция скорости чтения
+   //Коррекция скорости чтения
+   curr_user_data.speed_char=curr_user_data.speed_char*curr_user_data.und_rate;
+   curr_user_data.speed_word=curr_user_data.speed_word*curr_user_data.und_rate;
+   //Коррекция скорости чтения
+   User.get_last()->speed_char=curr_user_data.speed_char;
+   User.get_last()->speed_word=curr_user_data.speed_word;
    User.get_last()->und_rate=und;
-   User.get_last()->speed_char=curr_user_data.speed_char;//Коррекция скорости чтения
-   User.get_last()->speed_word=curr_user_data.speed_word;//Коррекция скорости чтения
 }
 
 void MainWindow::on_pushButton_start_pressed()
